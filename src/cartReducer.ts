@@ -3,6 +3,7 @@ export interface Item {
   price: number;
   quantity?: number;
   itemTotal?: number;
+  [key: string]: any;
 }
 
 export interface InitialState {

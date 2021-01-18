@@ -1,9 +1,9 @@
 import * as React from "react";
-import { cartReducer, InitialState, CartState, Item } from "./cartReducer";
+import { cartReducer, CartState, Item } from "./cartReducer";
 
 const { createContext, useContext, useReducer } = React;
 
-const initialState: InitialState = {
+const initialState: any = {
   items: [],
   isEmpty: true,
   totalItems: 0,
@@ -11,7 +11,7 @@ const initialState: InitialState = {
   totalCost: 0,
 };
 
-const CartContext = createContext<CartState | InitialState>(initialState);
+const CartContext = createContext<CartState | undefined>(initialState);
 
 export const useCart = () => {
   // This makes sure that the cart functions are always
