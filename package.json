@@ -1,6 +1,6 @@
 {
   "name": "react-hook-cart",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "This is a typescript, hook using shopping cart lib, that I'm hopeful will help a few people out.",
   "author": "getTobiasNielsen",
   "license": "MIT",
