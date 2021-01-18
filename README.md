@@ -55,3 +55,19 @@ const ShowCart = () => {
   );
 };
 ```
+
+#### 🔗 `addItem(Item, quantity)`
+
+`Item` is an object `{id: string, price: number}`
+
+`quantity` is optional, 1 by default
+
+```tsx
+const { addItem } = useCart();
+
+  return (
+    <button onClick={()=>addItem({id: "Bread", price: 5}, 2)}>Add 2 bread for 5 USD each</button> 
+  );
+};
+```
+
