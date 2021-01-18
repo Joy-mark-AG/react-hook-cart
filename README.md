@@ -2,6 +2,13 @@
 
 IMPORTANT: This package isn't functional yet.
 
+<div align="center">
+    
+[![npm](https://img.shields.io/badge/Build%20with-Typescript-blue?style=for-the-badge)](https://www.typescriptlang.org/)
+[![npm](https://img.shields.io/bundlephobia/minzip/react-hook-cart?style=for-the-badge)](https://bundlephobia.com/result?p=react-hook-cart@1.0.0)
+
+</div>
+
 🛒 This is a typescript, hook using shopping cart lib, that I'm hopeful will help a few people out.
 
 
