@@ -5,7 +5,7 @@ export interface Item {
   itemTotal?: number;
 }
 
-export interface initialState {
+export interface InitialState {
   items: Item[];
   isEmpty: boolean;
   totalItems: number;
@@ -13,7 +13,7 @@ export interface initialState {
   totalCost: number;
 }
 
-export interface CartState extends initialState {
+export interface CartState extends InitialState {
   addItem: (item: Item, quantity?: number) => void;
   removeItem: (id: Item["id"]) => void;
   clearCart: () => void;
@@ -28,7 +28,7 @@ export type Actions =
       type: "UPDATE_ITEM";
       payload: { item: Item; idToUpdate: Item["id"] };
     }
-  | { type: "CLEAR_CART"; payload: { initialCartState: CartState } };
+  | { type: "CLEAR_CART"; payload: { initialCartState: InitialState } };
 
 const generateCartState = (
   currentCartState: CartState,
@@ -62,7 +62,10 @@ const calculateCartTotal = (items: Item[]): number =>
 
 const calculateUniqueItems = (items: Item[]): number => items.length;
 
-export const cartReducer = (state: CartState, action: Actions): CartState => {
+export const cartReducer = (
+  state: CartState,
+  action: Actions
+): CartState | InitialState => {
   switch (action.type) {
     case "ADD_ITEM": {
       const items = [...state.items, action.payload.item];
