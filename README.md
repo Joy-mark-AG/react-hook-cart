@@ -60,7 +60,7 @@ const ShowCart = () => {
 
 - `Item` is an object `{id: string, price: number}`
 
-- `quantity` is optional, 1 by default
+- `quantity` is a number, but optional. Default value is 1
 
 ```tsx
 const { addItem } = useCart();
