@@ -9,6 +9,10 @@ IMPORTANT: This package isn't functional yet.
 
     $ npm install react-hook-cart
 
+<h2>📖 Example</h2>
+
+Check out the <a href="https://codesandbox.io/s/react-hook-cart-example-gnxl1">Demo</a>.
+
 <h2>🕹 API</h2>
 
 #### 🔗 `CartProvider`
