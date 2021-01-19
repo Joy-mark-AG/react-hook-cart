@@ -11,7 +11,6 @@ IMPORTANT: This package isn't functional yet.
 
 🛒 This is a typescript, hook using shopping cart lib, that I'm hopeful will help a few people out.
 
-
 <h2>📦 Installation</h2>
 
     $ npm install react-hook-cart
@@ -31,7 +30,7 @@ import { CartProvider } from "react-hook-cart";
 
 <CartProvider>
   <App />
-</CartProvider>
+</CartProvider>;
 ```
 
 #### 🔗 `useCart()`
@@ -41,9 +40,19 @@ Function to expose cart functionality
 ```tsx
 import { useCart } from "react-hook-cart";
 
-const ShowCart = () => {
-  const { items } = useCart();
+const { items, isEmpty, totalCost, addItem, removeItem, clearCart } = useCart();
+```
 
+#### 🔗 `items`
+
+`items` in an `Item` array
+
+```tsx
+import { useCart } from "react-hook-cart";
+
+const { items } = useCart();
+
+const ShowCart = () => {
   return (
     <div>
       <ul>
@@ -58,7 +67,9 @@ const ShowCart = () => {
 
 #### 🔗 `addItem(Item, quantity)`
 
-- `Item` is an object `{id: string, price: number}`
+Adds the item to the items array
+
+- `Item` is an object `{id: string, price: number}`, it can have additional properties `{id: string, price: number, name:"example"}`
 
 - `quantity` is a number, but optional. Default value is 1
 
@@ -66,8 +77,125 @@ const ShowCart = () => {
 const { addItem } = useCart();
 
   return (
-    <button onClick={()=>addItem({id: "Bread", price: 5}, 2)}>Add 2 bread for 5 USD each</button> 
+    <button onClick={()=>addItem({id: "Br73s", price: 5}, 2)}>Add 2 bread for 5 USD each</button>
   );
 };
 ```
 
+#### 🔗 `removeItem(id)`
+
+Removes all of the items with that id.
+
+- `id` is a string
+
+```tsx
+const { removeItem } = useCart();
+
+  return (
+    <button onClick={()=>removeItem("Br73s")}>Remove items</button>
+  );
+};
+```
+
+#### 🔗 `clearCart()`
+
+`clearCart()` empties the cart, and resets the state.
+
+```tsx
+const { clearCart } = useCart();
+
+  return (
+    <button onClick={()=>clearCart()}>Empty the cart!</button>
+  );
+};
+```
+
+#### 🔗 `isEmpty`
+
+A quick and easy way to check if the cart is empty.
+
+- `isEmpty` is a boolean.
+
+```tsx
+const { isEmpty } = useCart();
+
+  return (
+    <p>{isEmpty ? "I am empty" : "I am not empty"}</p>
+  );
+};
+```
+
+#### 🔗 `getItem(id)`
+
+Get item with that id.
+
+- `id` is a string
+
+```tsx
+const { getItem } = useCart();
+
+  const item = getItem("Br73s")}>
+
+};
+```
+
+#### 🔗 `inCart(id)`
+
+Quickly check if an item is in the cart.
+
+- `id` is a string
+
+- returns a boolean
+
+```tsx
+const { inCart } = useCart();
+
+  const itemWasInCart = inCart("Br73s")}>
+
+};
+```
+
+#### 🔗 `totalItems`
+
+The total amount of items in the cart.
+
+- `totalItems` is a number
+
+```tsx
+const { totalItems } = useCart();
+
+  return (
+    <p>There are {totalItems} in the cart</p>
+  );
+};
+```
+
+#### 🔗 `totalUniqueItems`
+
+The total amount of unique items in the cart.
+
+- `totalUniqueItems` is a number
+
+```tsx
+const { totalUniqueItems } = useCart();
+
+  return (
+    <p>There are {totalUniqueItems} in the cart</p>
+  );
+};
+```
+
+#### 🔗 `totalCost`
+
+The total cost of all the items in the cart.
+
+- `totalCost` is a number
+
+```tsx
+const { totalCost } = useCart();
+
+  return (
+    <p>The total cost of the cart is: {totalCost}</p>
+  );
+};
+```
