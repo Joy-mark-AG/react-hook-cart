@@ -1,7 +1,8 @@
 import * as React from "react";
 import { cartReducer, CartState, Item } from "./cartReducer";
+import useLocalStorage from "./useLocalStorage";
 
-const { createContext, useContext, useReducer } = React;
+const { createContext, useContext, useReducer, useEffect } = React;
 
 const initialState: any = {
   items: [],
@@ -20,10 +21,25 @@ export const useCart = () => {
   return context;
 };
 
-export const CartProvider: React.FC<{ children: React.ReactNode }> = ({
-  children,
-}) => {
-  const [cartState, dispatchCartState] = useReducer(cartReducer, initialState);
+export const CartProvider: React.FC<{
+  children: React.ReactNode;
+  storage?: any;
+}> = ({ children, storage = useLocalStorage }) => {
+  const [storedCart, saveCart] = storage(
+    "react-use-cart",
+    JSON.stringify({
+      ...initialState,
+    })
+  );
+
+  const [cartState, dispatchCartState] = useReducer(
+    cartReducer,
+    JSON.parse(storedCart)
+  );
+
+  useEffect(() => {
+    saveCart(JSON.stringify(cartState));
+  }, [cartState, saveCart]);
 
   const addItem = (item: Item, quantity: number = 1): void => {
     if (quantity < 1) return;
