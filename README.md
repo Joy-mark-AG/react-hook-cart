@@ -97,6 +97,23 @@ const { removeItem } = useCart();
 };
 ```
 
+#### 🔗 `updateItemQuantity(id, quantity)`
+
+`updateItemQuantity` changes the quantity of an item to the exact quantity given.
+
+- `id` is a string
+
+- `quantity` is a number
+
+```tsx
+const { updateItemQuantity } = useCart();
+
+  return (
+    <button onClick={()=>updateItemQuantity("Br73s", 5)}>Set item amount to 5</button>
+  );
+};
+```
+
 #### 🔗 `clearCart()`
 
 `clearCart()` empties the cart, and resets the state.

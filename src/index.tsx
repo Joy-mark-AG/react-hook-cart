@@ -56,6 +56,24 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({
     dispatchCartState({ type: "REMOVE_ITEM", payload: { idToRemove: id } });
   };
 
+  const updateItemQuantity = (id: Item["id"], quantity: number): void => {
+    if (quantity <= 0) {
+      dispatchCartState({ type: "REMOVE_ITEM", payload: { idToRemove: id } });
+      return;
+    }
+
+    const currentItem = cartState.items.find((item) => item.id === id);
+
+    if (!currentItem) throw new Error("No Item with that id in Items array.");
+
+    const item = { ...currentItem, quantity };
+
+    dispatchCartState({
+      type: "UPDATE_ITEM",
+      payload: { item, idToUpdate: id },
+    });
+  };
+
   const clearCart = (): void => {
     const payload = { initialCartState: initialState };
     dispatchCartState({ type: "CLEAR_CART", payload });
@@ -73,6 +91,7 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({
         ...cartState,
         addItem,
         removeItem,
+        updateItemQuantity,
         clearCart,
         getItem,
         inCart,

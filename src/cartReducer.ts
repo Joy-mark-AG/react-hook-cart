@@ -17,6 +17,7 @@ export interface InitialState {
 export interface CartState extends InitialState {
   addItem: (item: Item, quantity?: number) => void;
   removeItem: (id: Item["id"]) => void;
+  updateItemQuantity: (id: Item["id"], quantity: number) => void;
   clearCart: () => void;
   getItem: (id: Item["id"]) => Item | undefined;
   inCart: (id: Item["id"]) => boolean;
