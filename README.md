@@ -120,7 +120,7 @@ A quick and easy way to check if the cart is empty.
 const { isEmpty } = useCart();
 
   return (
-    <p>{isEmpty ? "I am empty" : "I am not empty"}</p>
+    <p>The cart is {isEmpty ? "empty" : "not empty"}</p>
   );
 };
 ```
