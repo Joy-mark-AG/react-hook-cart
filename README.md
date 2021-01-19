@@ -97,6 +97,23 @@ const { removeItem } = useCart();
 };
 ```
 
+#### 🔗 `updateItem(id, updates)`
+
+`updateItem` updates the item with the updates object.
+
+- `id` is a string
+
+- `updates` is an object
+
+```tsx
+const { updateItem } = useCart();
+
+  return (
+    <button onClick={()=>updateItem("Br73s", { size: "Large" })}>Make it a large bread!</button>
+  );
+};
+```
+
 #### 🔗 `updateItemQuantity(id, quantity)`
 
 `updateItemQuantity` changes the quantity of an item to the exact quantity given.
