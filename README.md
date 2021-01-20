@@ -30,7 +30,7 @@ import { CartProvider } from "react-hook-cart";
 
 <CartProvider>
   <App />
-</CartProvider>;
+</CartProvider>
 ```
 
 #### 🔗 `useCart()`
@@ -79,7 +79,7 @@ const { addItem } = useCart();
   return (
     <button onClick={()=>addItem({id: "Br73s", price: 5}, 2)}>Add 2 bread for 5 USD each</button>
   );
-};
+
 ```
 
 #### 🔗 `removeItem(id)`
@@ -94,7 +94,7 @@ const { removeItem } = useCart();
   return (
     <button onClick={()=>removeItem("Br73s")}>Remove items</button>
   );
-};
+
 ```
 
 #### 🔗 `updateItem(id, updates)`
@@ -111,7 +111,7 @@ const { updateItem } = useCart();
   return (
     <button onClick={()=>updateItem("Br73s", { size: "Large" })}>Make it a large bread!</button>
   );
-};
+
 ```
 
 #### 🔗 `updateItemQuantity(id, quantity)`
@@ -128,7 +128,7 @@ const { updateItemQuantity } = useCart();
   return (
     <button onClick={()=>updateItemQuantity("Br73s", 5)}>Set item amount to 5</button>
   );
-};
+
 ```
 
 #### 🔗 `clearCart()`
@@ -141,7 +141,7 @@ const { clearCart } = useCart();
   return (
     <button onClick={()=>clearCart()}>Empty the cart!</button>
   );
-};
+
 ```
 
 #### 🔗 `isEmpty`
@@ -156,7 +156,7 @@ const { isEmpty } = useCart();
   return (
     <p>The cart is {isEmpty ? "empty" : "not empty"}</p>
   );
-};
+
 ```
 
 #### 🔗 `getItem(id)`
@@ -170,7 +170,7 @@ const { getItem } = useCart();
 
   const item = getItem("Br73s")}>
 
-};
+
 ```
 
 #### 🔗 `inCart(id)`
@@ -186,7 +186,7 @@ const { inCart } = useCart();
 
   const itemWasInCart = inCart("Br73s")}>
 
-};
+
 ```
 
 #### 🔗 `totalItems`
@@ -201,7 +201,7 @@ const { totalItems } = useCart();
   return (
     <p>There are {totalItems} in the cart</p>
   );
-};
+
 ```
 
 #### 🔗 `totalUniqueItems`
@@ -216,7 +216,7 @@ const { totalUniqueItems } = useCart();
   return (
     <p>There are {totalUniqueItems} in the cart</p>
   );
-};
+
 ```
 
 #### 🔗 `totalCost`
@@ -231,5 +231,5 @@ const { totalCost } = useCart();
   return (
     <p>The total cost of the cart is: {totalCost}</p>
   );
-};
+
 ```
