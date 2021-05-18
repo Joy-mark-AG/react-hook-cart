@@ -1,9 +1,17 @@
+import { displayCurrency } from "./index";
+
 export interface Item {
   id: string;
-  price: number;
+  price: IPrice[];
   quantity?: number;
   itemTotal?: number;
+
   [key: string]: any;
+}
+
+export interface IPrice {
+  currency: string;
+  value: number;
 }
 
 export interface InitialState {
@@ -28,14 +36,14 @@ export type Actions =
   | { type: "ADD_ITEM"; payload: { item: Item } }
   | { type: "REMOVE_ITEM"; payload: { idToRemove: Item["id"] } }
   | {
-      type: "UPDATE_ITEM";
-      payload: { item: Item; idToUpdate: Item["id"] };
-    }
+  type: "UPDATE_ITEM";
+  payload: { item: Item; idToUpdate: Item["id"] };
+}
   | { type: "CLEAR_CART"; payload: { initialCartState: InitialState } };
 
 const generateCartState = (
   currentCartState: CartState,
-  items: Item[]
+  items: Item[],
 ): CartState => {
   const totalUniqueItems = calculateUniqueItems(items);
   const isEmpty = totalUniqueItems === 0;
@@ -51,23 +59,35 @@ const generateCartState = (
 };
 
 const calculateItemTotals = (items: Item[]): Item[] => {
-  return items.map((item) => ({
-    ...item,
-    itemTotal: item.price * item.quantity!,
-  }));
+  return items.map((item) => {
+    const price = item.price.find((p) => p.currency === displayCurrency);
+    if (price === undefined) throw new Error("The defined currency couldn't be found!")
+    const parsedPrice = price ? price.value : 0;
+
+    return ({
+      ...item,
+      itemTotal: parsedPrice * item.quantity!,
+    });
+  });
 };
 
 const calculateTotalItems = (items: Item[]): number =>
   items.reduce((sum, item) => sum + item.quantity!, 0);
 
 const calculateCartTotal = (items: Item[]): number =>
-  items.reduce((total, item) => total + item.quantity! * item.price, 0);
+  items.reduce((total, item) => {
+    const price = item.price.find((p) => p.currency === displayCurrency)
+    if (price === undefined) throw new Error("The defined currency couldn't be found!")
+    const parsedPrice = price ? price.value : 0
+
+    return total + item.quantity! * parsedPrice
+  }, 0);
 
 const calculateUniqueItems = (items: Item[]): number => items.length;
 
 export const cartReducer = (
   state: CartState,
-  action: Actions
+  action: Actions,
 ): CartState | InitialState => {
   switch (action.type) {
     case "ADD_ITEM": {
@@ -89,7 +109,7 @@ export const cartReducer = (
     }
     case "REMOVE_ITEM": {
       const items = state.items.filter(
-        (item) => item.id !== action.payload.idToRemove
+        (item) => item.id !== action.payload.idToRemove,
       );
 
       return generateCartState(state, items);

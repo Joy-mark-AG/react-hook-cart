@@ -14,8 +14,11 @@ const initialState: any = {
 
 const CartContext = createContext<CartState | undefined>(initialState);
 
-export const useCart = () => {
+export let displayCurrency = "CZK";
+
+export const useCart = (defaultCurrency: string) => {
   // This makes sure that the cart functions are always
+  displayCurrency = defaultCurrency;
   const context = useContext(CartContext);
   if (!context) throw new Error("Expected to be wrapped in a CartProvider");
   return context;
@@ -29,12 +32,12 @@ export const CartProvider: React.FC<{
     "react-use-cart",
     JSON.stringify({
       ...initialState,
-    })
+    }),
   );
 
   const [cartState, dispatchCartState] = useReducer(
     cartReducer,
-    JSON.parse(storedCart)
+    JSON.parse(storedCart),
   );
 
   useEffect(() => {
