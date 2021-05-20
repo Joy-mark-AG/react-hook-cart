@@ -1,10 +1,9 @@
 {
-  "name": "react-hook-cart",
+  "name": "@joy/react-hook-cart",
   "version": "2.2.1",
   "description": "This is a typescript, hook using shopping cart lib, that I'm hopeful will help a few people out.",
   "author": "getTobiasNielsen",
   "license": "MIT",
-  "repository": "getTobiasNielsen/react-hook-cart",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "engines": {
@@ -31,5 +30,13 @@
   },
   "files": [
     "dist"
-  ]
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Joy-mark-AG/react-hook-cart.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Joy-mark-AG/react-hook-cart/issues"
+  },
+  "homepage": "https://github.com/Joy-mark-AG/react-hook-cart#readme"
 }
